@@ -1,0 +1,95 @@
+.amber {
+	--amber: 225, 176, 0;
+
+	color: rgb(var(--amber));
+	text-shadow:
+		0 0 2pt rgba(var(--amber), 0.2),
+		0 0 3pt rgba(var(--amber), 0.2),
+		0 0 6pt rgba(var(--amber), 0.2),
+		0 0 8pt rgba(var(--amber), 0.2),
+		var(--chromatic-abberation);
+}
+
+.light-amber {
+	--light-amber: 255, 204, 0;
+
+	color: rgb(var(--light-amber));
+	text-shadow:
+		0 0 2pt rgba(var(--light-amber), 0.2),
+		0 0 3pt rgba(var(--light-amber), 0.2),
+		0 0 6pt rgba(var(--light-amber), 0.2),
+		0 0 8pt rgba(var(--light-amber), 0.2),
+		var(--chromatic-abberation);
+}
+
+.green-1 {
+	--green-1: 51, 255, 0;
+	
+	color: rgb(var(--green-1));
+	text-shadow:
+		0 0 2pt rgba(var(--green-1), 0.2),
+		0 0 3pt rgba(var(--green-1), 0.2),
+		0 0 6pt rgba(var(--green-1), 0.2),
+		0 0 8pt rgba(var(--green-1), 0.2),
+		var(--chromatic-abberation);
+}
+
+.green-2 {
+	--green-2: 0, 255, 51;
+	
+	color: rgb(var(--green-2));
+	text-shadow:
+		0 0 2pt rgba(var(--green-2), 0.2),
+		0 0 3pt rgba(var(--green-2), 0.2),
+		0 0 6pt rgba(var(--green-2), 0.2),
+		0 0 8pt rgba(var(--green-2), 0.2),
+		var(--chromatic-abberation);
+}
+
+.green-3 {
+	--green-3: 0, 255, 102;
+	
+	color: rgb(var(--green-3));
+	text-shadow:
+		0 0 2pt rgba(var(--green-3), 0.2),
+		0 0 3pt rgba(var(--green-3), 0.2),
+		0 0 6pt rgba(var(--green-3), 0.2),
+		0 0 8pt rgba(var(--green-3), 0.2),
+		var(--chromatic-abberation);
+}
+
+.apple-2 {
+	--apple-2: 51, 255, 51;
+	
+	color: rgb(var(--apple-2));
+	text-shadow:
+		0 0 2pt rgba(var(--apple-2), 0.2),
+		0 0 3pt rgba(var(--apple-2), 0.2),
+		0 0 6pt rgba(var(--apple-2), 0.2),
+		0 0 8pt rgba(var(--apple-2), 0.2),
+		var(--chromatic-abberation);
+}
+
+.apple-2c {
+	--apple-2c: 102, 255, 102;
+	
+	color: rgb(var(--apple-2c));
+	text-shadow:
+		0 0 2pt rgba(var(--apple-2c), 0.2),
+		0 0 3pt rgba(var(--apple-2c), 0.2),
+		0 0 6pt rgba(var(--apple-2c), 0.2),
+		0 0 8pt rgba(var(--apple-2c), 0.2),
+		var(--chromatic-abberation);
+}
+
+.robco {
+	--robco: 0, 214, 93;
+
+	color: rgb(var(--robco));
+	text-shadow:
+		0 0 2pt rgba(var(--robco), 0.2),
+		0 0 3pt rgba(var(--robco), 0.2),
+		0 0 6pt rgba(var(--robco), 0.2),
+		0 0 8pt rgba(var(--robco), 0.2),
+		var(--chromatic-abberation);
+}

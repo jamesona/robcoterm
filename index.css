@@ -1,0 +1,87 @@
+:root {
+	--chromatic-abberation-red-1: -2px 2px rgba(100, 0, 0, 0.2);
+	--chromatic-abberation-red-2: -2px 2px 3px rgba(100, 0, 0, 0.2);
+	--chromatic-abberation-blue-1: 2px -2px rgba(0, 0, 100, 0.2);
+	--chromatic-abberation-blue-2: 2px -2px 3px rgba(0, 0, 100, 0.2);
+	--chromatic-abberation: var(--chromatic-abberation-red-1), var(--chromatic-abberation-red-2), var(--chromatic-abberation-blue-1), var(--chromatic-abberation-blue-2);
+}
+
+body {
+	overflow: hidden;
+}
+
+body, .terminal {
+	height: 100vh;
+	width: 110vw;
+	overflow-x: hidden;
+	border: 0;
+	padding: 0;
+	left: 0;
+	margin: 0;
+}
+
+.terminal {
+	/* white-space: pre; */
+	background: rgb(10, 10, 10);
+	display: block;
+	font-family: monospace;
+	font-size: calc(100vw / 40);
+	max-height: 100vh;
+	overflow-y: scroll;
+	/* position: absolute; */
+	/* text-shadow: var(--chromatic-abberation); */
+	/* top: 0; */
+}
+
+.terminal * {
+	margin: 0;
+	padding: 0;
+	white-space: pre-line;
+	max-width: 100vw;
+	word-break: break-word;
+	overflow-wrap: break-word;
+}
+
+.terminal .prompt::before {
+	content: '>';
+	pointer-events: none;
+}
+
+@keyframes blink {
+	0%		{ opacity: 1; }
+	50%		{ opacity: 1; }
+	51%		{ opacity: 0; }
+	100%	{ opacity: 0; }
+}
+
+.terminal .prompt::after {
+	content: '\2588';
+	pointer-events: none;
+	animation: blink 1.5s infinite;
+}
+
+.center {
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+}
+
+.vt232 {
+	font-family: 'VT323', monospace;
+}
+
+.space-mono {
+	font-family: 'Space Mono', monospace;
+}
+
+.share-tech-mono {
+	font-family: 'Share Tech Mono', monospace;
+}
+
+.ibm-plex-mono {
+	font-family: 'IBM Plex Mono', monospace;
+}
+
+.fixedsys {
+	font-family: 'Fixedsys Excelsior 3.01', monospace;
+}
