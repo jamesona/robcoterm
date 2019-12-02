@@ -62,54 +62,58 @@
 			--chromatic-abberation: var(--chromatic-abberation-red-1), var(--chromatic-abberation-red-2), var(--chromatic-abberation-blue-1), var(--chromatic-abberation-blue-2);
 		}
 
+		body {
+			overflow: hidden;
+		}
+
+		body, .terminal {
+			height: 100vh;
+			width: 110vw;
+			overflow-x: hidden;
+			border: 0;
+			padding: 0;
+			left: 0;
+			margin: 0;
+		}
+
 		.terminal {
 			/* white-space: pre; */
 			background: rgb(10, 10, 10);
-			border: 0;
 			display: block;
 			font-family: monospace;
 			font-size: calc(100vw / 40);
-			height: 100vh;
-			left: 0;
-			margin: 0;
-			padding: 0;
-			padding: 1rem;
-			position: absolute;
+			max-height: 100vh;
+			overflow-y: scroll;
+			/* position: absolute; */
 			/* text-shadow: var(--chromatic-abberation); */
-			top: 0;
-			width: 100vw;
+			/* top: 0; */
 		}
 
 		.terminal * {
 			margin: 0;
 			padding: 0;
 			white-space: pre-line;
-		}
-
-		.terminal .prompt {
-			position: absolute;
-			bottom: calc(100vw / 40);
-			left: 0.5em;
-			width: 100%;
-		}
-
-		.terminal .prompt input {
-			border: 0;
-			margin: 0;
-			padding: 0;
-			background: inherit;
-			color: inherit;
-			font-family: inherit;
-			font-size: inherit;
-			text-shadow: inherit;
-			width: calc(100% - 1.5em);
-			outline: none;
-			caret-color: transparent;
+			max-width: 100vw;
+			word-break: break-word;
+			overflow-wrap: break-word;
 		}
 
 		.terminal .prompt::before {
 			content: '>';
 			pointer-events: none;
+		}
+
+		@keyframes blink {
+			0%		{ opacity: 1; }
+			50%		{ opacity: 1; }
+			51%		{ opacity: 0; }
+			100%	{ opacity: 0; }
+		}
+
+		.terminal .prompt::after {
+			content: '█';
+			pointer-events: none;
+			animation: blink 1.5s infinite;
 		}
 
 		.center {
@@ -236,8 +240,10 @@
 	</style>
 </head>
 
-<body class="terminal scanlines robco fixedsys">
-<div class="prompt"></div>
+<body class="scanlines">
+	<div class="terminal robco fixedsys">
+		<p class="prompt"></p>
+	</div>
 </body>
 <script type="text/javascript">
 	const { body } = document
@@ -313,47 +319,91 @@
 		
 	}
 
-	const commandHistory = new CommandHistory()
+	(terminal => {
+		terminal.prepend(element('div').class('scrollback').make())
+		const commandHistory = new CommandHistory()
+		const scrollback = document.querySelector('.scrollback')
+		const prompt = document.querySelector('.prompt')
 
-	const prompt = document.querySelector('.prompt')
+		const scrollToBottom = () => terminal.scrollTop = terminal.scrollHeight
 	
-	document.addEventListener('keydown', ({key, code}) => {
-		if ('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'.includes(key)) {
-			prompt.innerHTML += key
-		} else {
-			const { innerHTML } = prompt
+		document.addEventListener('keydown', event => {
+			event.preventDefault()
+			event.stopImmediatePropagation()
 
-			switch (key) {
-				case 'Enter': {
-					commandHistory.insert(innerHTML)
-					prompt.innerHTML = null
-					handleEntry(innerHTML)
-					break
-				}
-				case 'Backspace': {
-					prompt.innerHTML = innerHTML.slice(0, -1)
-					break
-				}
-				case 'ArrowUp': {
-					prompt.innerHTML = commandHistory.prev()
-					break
-				}
-				case 'ArrowDown': {
-					prompt.innerHTML = commandHistory.next()
-					break
-				}
-				default: {
-					debugger
+			const { key, code } = event
+
+			if ('abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'.includes(key)) {
+				prompt.innerHTML += key
+			} else {
+				const { innerHTML } = prompt
+	
+				switch (key) {
+					case 'Enter': {
+						commandHistory.insert(innerHTML)
+						prompt.innerHTML = null
+						handleEntry(innerHTML)
+						break
+					}
+					case 'Backspace': {
+						prompt.innerHTML = innerHTML.slice(0, -1)
+						break
+					}
+					case 'ArrowUp': {
+						prompt.innerHTML = commandHistory.prev()
+						break
+					}
+					case 'ArrowDown': {
+						prompt.innerHTML = commandHistory.next()
+						break
+					}
+					default: {
+						debugger
+					}
 				}
 			}
+
+			scrollToBottom()
+		})
+	
+		const commands = {
+			print(options, ...args) {
+				const { classList } = options
+
+				if (typeof options !== 'object') {
+					args.unshift(options)
+				}
+
+				scrollback.appendChild(element('p').contents(args.join(' ')).class(...(classList || [])).make())
+			},
+			echo(...args) {
+				commands.print(args.join(' '))
+			},
+			center(...args) {
+				commands.print({classList: ['center']}, ...args)
+			},
+			clear() {
+				scrollback.innerHTML = ''
+			},
+			reset() {
+				commands.clear()
+			}
 		}
-	})
+	
+		const handleEntry = value => {
+			const args = value.split(' ')
+			const command = args.shift()
+	
+			try {
+				commands[command](...args)
+			} catch (e) {
+				commands.print(`No command "${command}" found.`)
+			}
+		}
+	
+		commands.center(headerMessage)
+		commands.print(trespasserMessage)
+	})(document.querySelector('.terminal'))
 
-	const handleEntry = value => {
-		
-	}
-
-	body.appendChild(element('span').contents(headerMessage).class('center').make())
-	body.appendChild(element('span').contents(trespasserMessage).make())
 </script>
 </html>
