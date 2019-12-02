@@ -54,6 +54,14 @@
 		}
 		/* PRESENTATION STUFF */
 
+		:root {
+			--chromatic-abberation-red-1: -2px 2px rgba(100, 0, 0, 0.2);
+			--chromatic-abberation-red-2: -2px 2px 3px rgba(100, 0, 0, 0.2);
+			--chromatic-abberation-blue-1: 2px -2px rgba(0, 0, 100, 0.2);
+			--chromatic-abberation-blue-2: 2px -2px 3px rgba(0, 0, 100, 0.2);
+			--chromatic-abberation: var(--chromatic-abberation-red-1), var(--chromatic-abberation-red-2), var(--chromatic-abberation-blue-1), var(--chromatic-abberation-blue-2);
+		}
+
 		.terminal {
 			/* white-space: pre; */
 			background: rgb(10, 10, 10);
@@ -67,7 +75,7 @@
 			padding: 0;
 			padding: 1rem;
 			position: absolute;
-			text-shadow: 2px 2px rgba(100, 0, 0, 0.2), 2px 2px 3px rgba(100, 0, 0, 0.2), -2px -2px rgba(0, 0, 100, 0.2), -2px -2px 3px rgba(0, 0, 100, 0.2);
+			/* text-shadow: var(--chromatic-abberation); */
 			top: 0;
 			width: 100vw;
 		}
@@ -78,7 +86,14 @@
 			white-space: pre-line;
 		}
 
-		.terminal input, .terminal span[contenteditable] {
+		.terminal .prompt {
+			position: absolute;
+			bottom: calc(100vw / 40);
+			left: 0.5em;
+			width: 100%;
+		}
+
+		.terminal .prompt input {
 			border: 0;
 			margin: 0;
 			padding: 0;
@@ -87,11 +102,14 @@
 			font-family: inherit;
 			font-size: inherit;
 			text-shadow: inherit;
+			width: calc(100% - 1.5em);
 			outline: none;
-			position: absolute;
-			bottom: calc(100vw / 40);
-			left: 0;
 			caret-color: transparent;
+		}
+
+		.terminal .prompt::before {
+			content: '>';
+			pointer-events: none;
 		}
 
 		.center {
@@ -101,36 +119,99 @@
 		}
 
 		.amber {
-			color: rgb(225, 176, 0);
+			--amber: 225, 176, 0;
+
+			color: rgb(var(--amber));
+			text-shadow:
+				0 0 2pt rgba(var(--amber), 0.2),
+				0 0 3pt rgba(var(--amber), 0.2),
+				0 0 6pt rgba(var(--amber), 0.2),
+				0 0 8pt rgba(var(--amber), 0.2),
+				var(--chromatic-abberation);
 		}
 
 		.light-amber {
-			color: rgb(255, 204, 0);
+			--light-amber: 255, 204, 0;
+
+			color: rgb(var(--light-amber));
+			text-shadow:
+				0 0 2pt rgba(var(--light-amber), 0.2),
+				0 0 3pt rgba(var(--light-amber), 0.2),
+				0 0 6pt rgba(var(--light-amber), 0.2),
+				0 0 8pt rgba(var(--light-amber), 0.2),
+				var(--chromatic-abberation);
 		}
 
 		.green-1 {
-			color: rgb(51, 255, 0);
+			--green-1: 51, 255, 0;
+			
+			color: rgb(var(--green-1));
+			text-shadow:
+				0 0 2pt rgba(var(--green-1), 0.2),
+				0 0 3pt rgba(var(--green-1), 0.2),
+				0 0 6pt rgba(var(--green-1), 0.2),
+				0 0 8pt rgba(var(--green-1), 0.2),
+				var(--chromatic-abberation);
 		}
 
 		.green-2 {
-			color: rgb(0, 255, 51);
+			--green-2: 0, 255, 51;
+			
+			color: rgb(var(--green-2));
+			text-shadow:
+				0 0 2pt rgba(var(--green-2), 0.2),
+				0 0 3pt rgba(var(--green-2), 0.2),
+				0 0 6pt rgba(var(--green-2), 0.2),
+				0 0 8pt rgba(var(--green-2), 0.2),
+				var(--chromatic-abberation);
 		}
 
 		.green-3 {
-			color: rgb(0, 255, 102);
+			--green-3: 0, 255, 102;
+			
+			color: rgb(var(--green-3));
+			text-shadow:
+				0 0 2pt rgba(var(--green-3), 0.2),
+				0 0 3pt rgba(var(--green-3), 0.2),
+				0 0 6pt rgba(var(--green-3), 0.2),
+				0 0 8pt rgba(var(--green-3), 0.2),
+				var(--chromatic-abberation);
 		}
 
 		.apple-2 {
-			color: rgb(51, 255, 51);
+			--apple-2: 51, 255, 51;
+			
+			color: rgb(var(--apple-2));
+			text-shadow:
+				0 0 2pt rgba(var(--apple-2), 0.2),
+				0 0 3pt rgba(var(--apple-2), 0.2),
+				0 0 6pt rgba(var(--apple-2), 0.2),
+				0 0 8pt rgba(var(--apple-2), 0.2),
+				var(--chromatic-abberation);
 		}
 
 		.apple-2c {
-			color: rgb(102, 255, 102);
+			--apple-2c: 102, 255, 102;
+			
+			color: rgb(var(--apple-2c));
+			text-shadow:
+				0 0 2pt rgba(var(--apple-2c), 0.2),
+				0 0 3pt rgba(var(--apple-2c), 0.2),
+				0 0 6pt rgba(var(--apple-2c), 0.2),
+				0 0 8pt rgba(var(--apple-2c), 0.2),
+				var(--chromatic-abberation);
 		}
 
 		.robco {
-			color: rgb(0, 214, 93);
-			text-shadow: 0 0 4pt rgba(0, 214, 93, 0.4), 0 0 6pt rgba(0, 214, 93, 0.3), 0 0 8pt rgba(0, 214, 93, 0.2), 0 0 16pt rgba(0, 214, 93, 0.1)
+			--robco: 0, 214, 93;
+
+			color: rgb(var(--robco));
+			text-shadow:
+				0 0 2pt rgba(var(--robco), 0.2),
+				0 0 3pt rgba(var(--robco), 0.2),
+				0 0 6pt rgba(var(--robco), 0.2),
+				0 0 8pt rgba(var(--robco), 0.2),
+				var(--chromatic-abberation);
 		}
 
 		.VT232 {
@@ -156,21 +237,123 @@
 </head>
 
 <body class="terminal scanlines robco fixedsys">
-<!--span class="scale-bar">|12345679|12345679|12345679|12345679|12345679|12345679|12345679|12345679</span-->
-<span class="center">ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM
-COPYRIGHT 2075-2077 ROBCO INDUSTRIES
--Server 8-</span>
-<span>
--RobCo Tresspasser Management System-
-=====================================
--------------------------------------
-RobcOS v.85
-(C)2076 RobCo
-========================
-| User Log:
-| >> Administrator (RobCoID 2398-H)
-========================
-</span>
-<span contenteditable="true">></input>
+<div class="prompt"></div>
 </body>
+<script type="text/javascript">
+	const { body } = document
+	
+	const randomNumber = (max, min = 0) => {
+		min = Math.ceil(min)
+		max = Math.floor(max)
+		return Math.floor(Math.random() * (max - min +1)) + min
+	}
+	
+	const headerMessage = `ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM` +
+	`\nCOPYRIGHT 2075-2077 ROBCO INDUSTRIES\n-Server ${randomNumber(64, 1)}-`
+	
+	const trespasserMessage = `-RobCo Tresspasser Management System-` +
+		`\n=====================================` +
+		`\n-------------------------------------` +
+		`\nRobcOS v.85` +
+		`\n(C)2076 RobCo` +
+		`\n========================` +
+		`\n| User Log:` +
+		`\n| >> Administrator (RobCoID 2398-H)` +
+		`\n========================`
+
+	const scaleBar = `|12345679|12345679|12345679|12345679|12345679|12345679|12345679|12345679`
+
+	const element = (tag) => {
+		const ele = document.createElement(tag)
+
+		const builder = {
+			contents: contents => {
+				if (typeof contents === 'string') {
+					contents = document.createTextNode(contents)
+				}
+
+				if (contents instanceof Node) {
+					ele.appendChild(contents)
+				}
+
+				return builder
+			},
+			class: (...classNames) => {
+				classNames.forEach(className => {
+					ele.classList.add(className)
+				})
+				return builder
+			},
+			make: () => {
+				return ele
+			}
+		}
+
+		return builder
+	}
+
+	class CommandHistory {
+		constructor(history = []) {
+			this.history = [...history]
+			this.index = 0
+		}
+
+		insert(command) {
+			this.history.push(command)
+			this.index = this.history.length - 1
+		}
+
+		prev() {
+			return this.history[this.index = Math.max(this.index - 1, 0)]
+		}
+
+		next() {
+			return this.history[this.index = Math.min(this.index + 1, this.history.length)] || ''
+		}
+		
+	}
+
+	const commandHistory = new CommandHistory()
+
+	const prompt = document.querySelector('.prompt')
+	
+	document.addEventListener('keydown', ({key, code}) => {
+		if ('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'.includes(key)) {
+			prompt.innerHTML += key
+		} else {
+			const { innerHTML } = prompt
+
+			switch (key) {
+				case 'Enter': {
+					commandHistory.insert(innerHTML)
+					prompt.innerHTML = null
+					handleEntry(innerHTML)
+					break
+				}
+				case 'Backspace': {
+					prompt.innerHTML = innerHTML.slice(0, -1)
+					break
+				}
+				case 'ArrowUp': {
+					prompt.innerHTML = commandHistory.prev()
+					break
+				}
+				case 'ArrowDown': {
+					prompt.innerHTML = commandHistory.next()
+					break
+				}
+				default: {
+					debugger
+				}
+			}
+		}
+	})
+
+	const handleEntry = value => {
+		
+	}
+
+	body.appendChild(element('span').contents(headerMessage).class('center').make())
+	body.appendChild(element('span').contents(trespasserMessage).make())
+</script>
 </html>
