@@ -12,9 +12,10 @@
 	const { buildCommands } = await import('./commands.js')
 	const commands = await buildCommands(scrollback, elementBuilder)
 
-	const { headerMessage, trespasserMessage } = await import('./system-messages.js')
+	const { headerMessage, trespasserMessage, hack } = await import('./system-messages.js')
 	commands.center(headerMessage)
 	commands.print(trespasserMessage)
+	commands.print(hack)
 
 	function scrollToBottom() {
 		terminal.scrollTop = terminal.scrollHeight

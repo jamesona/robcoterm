@@ -57,6 +57,30 @@ export async function buildCommands(scrollback, elementBuilder) {
 			} else {
 				commands.print(`Font must be one of: ${fonts.join(' ')}`)
 			}
+		},
+		ls() {
+
+		},
+		dir() {
+
+		},
+		cat() {
+
+		},
+		read() {
+
+		},
+		open() {
+
+		},
+		remote() {
+
+		},
+		help() {
+
+		},
+		info() {
+
 		}
 	}
 
