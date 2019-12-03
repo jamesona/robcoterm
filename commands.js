@@ -2,7 +2,7 @@ export async function buildCommands(scrollback, elementBuilder) {
 	const commands = {
 		print(options, ...args) {
 			const scrollback = document.querySelector('.scrollback')
-			const { classList } = options
+			const { classList } = options || {}
 
 			if (typeof options !== 'object') {
 				args.unshift(options)
