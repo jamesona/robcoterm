@@ -10,7 +10,7 @@
 
 
 	const { buildCommands } = await import('./commands.js')
-	const commands = await buildCommands(scrollback, elementBuilder)
+	const commands = await buildCommands({terminal, scrollback, elementBuilder})
 
 	const { messages } = await import('./system-messages.js')
 	commands.center(messages.headerMessage)
@@ -25,11 +25,15 @@
 		const args = value.split(' ')
 		const command = args.shift()
 
+		commands.print(`>${value}`)
+
 		try {
 			commands[command](...args)
 		} catch (e) {
 			commands.print(`No command "${command}" found.`)
 		}
+
+		commands.print('\n')
 	}
 
 	function handleKey(event) {

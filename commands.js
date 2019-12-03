@@ -1,4 +1,4 @@
-export async function buildCommands(scrollback, elementBuilder) {
+export async function buildCommands({terminal, scrollback, elementBuilder}) {
 	const commands = {
 		print(options, ...args) {
 			const scrollback = document.querySelector('.scrollback')
@@ -76,8 +76,20 @@ export async function buildCommands(scrollback, elementBuilder) {
 		remote() {
 
 		},
-		help() {
-
+		help(command) {
+			switch (command) {
+				case 'print': {
+					commands.print('Print arguments as new line. Example: print test')
+					break
+				}
+				case 'echo': {
+					commands.print('Alias of print')
+					break
+				}
+				default: {
+					commands.print(`Available commands: ${Object.keys(commands).join(' ')}`)
+				}
+			}
 		},
 		info() {
 
