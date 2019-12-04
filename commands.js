@@ -1,77 +1,68 @@
-export async function buildCommands({terminal, scrollback, elementBuilder}) {
+const colors = [
+	'amber',
+	'light-amber',
+	'green-1',
+	'green-2',
+	'green-3',
+	'apple-2',
+	'apple-2c',
+	'robco'
+]
+
+const fonts = [
+	'vt232',
+	'space-mono',
+	'share-tech-mono',
+	'ibm-plex-mono',
+	'fixedsys'
+]
+
+export async function buildCommands({terminal, scrollback, filesystem}) {
+
 	const commands = {
-		print(options, ...args) {
-			const scrollback = document.querySelector('.scrollback')
-			const { classList } = options || {}
-
-			if (typeof options !== 'object') {
-				args.unshift(options)
-			}
-
-			scrollback.appendChild(elementBuilder('p').contents(args.join(' ')).class(...(classList || [])).make())
-		},
-		echo(...args) {
-			commands.print(args.join(' '))
-		},
-		center(...args) {
-			commands.print({ classList: ['center'] }, ...args)
-		},
 		clear() {
-			const scrollback = document.querySelector('.scrollback')
 			scrollback.innerHTML = ''
 		},
 		reset() {
 			commands.clear()
 		},
+		echo(...args) {
+			return args.join(' ')
+		},
 		setcolor(color) {
-			const colors = [
-				'amber',
-				'light-amber',
-				'green-1',
-				'green-2',
-				'green-3',
-				'apple-2',
-				'apple-2c',
-				'robco'
-			]
-
 			if (colors.includes(color)) {
 				colors.forEach(listColor => terminal.classList.remove(listColor))
 				terminal.classList.add(color)
 			} else {
-				commands.print(`Color must be one of: ${colors.join(' ')}`)
+				return `Color must be one of: ${colors.join(' ')}`
 			}
 		},
 		setfont(font) {
-			const fonts = [
-				'vt232',
-				'space-mono',
-				'share-tech-mono',
-				'ibm-plex-mono',
-				'fixedsys'
-			]
-
 			if (fonts.includes(font)) {
 				fonts.forEach(listFont => terminal.classList.remove(listFont))
 				terminal.classList.add(font)
 			} else {
-				commands.print(`Font must be one of: ${fonts.join(' ')}`)
+				return `Font must be one of: ${fonts.join(' ')}`
 			}
 		},
 		ls() {
-
+			return filesystem.listCurrentDirectory().join(' ')
 		},
-		dir() {
-
+		dir(...args) {
+			return commands.ls(...args)
 		},
-		cat() {
-
+		cd(...args) {
+			return filesystem.openDirectory(...args)
 		},
-		read() {
-
+		cat(filename) {
+			return filesystem.readFile(filename)
 		},
-		open() {
-
+		read(filename) {
+			return filesystem.readFile(filename)
+		},
+		open(name) {
+			const directoryError = filesystem.openDirectory(name)
+			if (directoryError) return filesystem.readFile(name)
 		},
 		remote() {
 
@@ -79,15 +70,13 @@ export async function buildCommands({terminal, scrollback, elementBuilder}) {
 		help(command) {
 			switch (command) {
 				case 'print': {
-					commands.print('Print arguments as new line. Example: print test')
-					break
+					return 'Print arguments as new line. Example: print test'
 				}
 				case 'echo': {
-					commands.print('Alias of print')
-					break
+					return 'Alias of print'
 				}
 				default: {
-					commands.print(`Available commands: ${Object.keys(commands).join(' ')}`)
+					return `Available commands: ${Object.keys(commands).join(' ')}`
 				}
 			}
 		},
