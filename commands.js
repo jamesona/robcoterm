@@ -69,11 +69,8 @@ export async function buildCommands({terminal, scrollback, filesystem}) {
 		},
 		help(command) {
 			switch (command) {
-				case 'print': {
-					return 'Print arguments as new line. Example: print test'
-				}
 				case 'echo': {
-					return 'Alias of print'
+					return 'Print arguments as new line. Example: print test'
 				}
 				default: {
 					return `Available commands: ${Object.keys(commands).join(' ')}`
