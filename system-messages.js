@@ -15,10 +15,10 @@ export const messages = {
 			`\n========================` +
 			`\n| User Log:` +
 			`\n| >> Administrator (RobCoID 2398-H)` +
-			'\n| >> New_Admin: null' +
-			'\n| Welcome new user, null' +
+			'\n| >> New_Admin: Null' +
+			'\n| Welcome new user, Null' +
 			'\n| >> New_Targeting_Param:' +
-			'\n| >>> null_userGroup' +
+			'\n| >>> Null_userGroup' +
 			`\n========================`,
 			
 		scaleBar: `|12345679|12345679|12345679|12345679|12345679|12345679|12345679|12345679`

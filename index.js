@@ -27,10 +27,12 @@
 
 		commands.print(`>${value}`)
 
-		try {
-			commands[command](...args)
-		} catch (e) {
-			commands.print(`No command "${command}" found.`)
+		if (command) {
+			try {
+				commands[command](...args)
+			} catch (e) {
+				commands.print(`No command "${command}" found. Try "help" for a list of options.`)
+			}
 		}
 
 		commands.print('\n')
