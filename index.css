@@ -43,7 +43,7 @@ body, .terminal {
 }
 
 .terminal .prompt::before {
-	content: '>';
+	content: attr(data-host)'>';
 	pointer-events: none;
 }
 
