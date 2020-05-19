@@ -1,10 +1,10 @@
 (async terminal => {
 	const prompt = document.querySelector('.prompt')
 
-	const { CommandHistory } = await import('/lib/command-history.js')
+	const { CommandHistory } = await import('./lib/command-history.js')
 	const commandHistory = new CommandHistory()
 
-	const { elementBuilder } = await import('/lib/element.js')
+	const { elementBuilder } = await import('./lib/element.js')
 	const scrollback = elementBuilder('div').class('scrollback').make()
 	terminal.prepend(scrollback)
 	
@@ -25,7 +25,7 @@
 		print({ classList: ['center'] }, ...args)
 	}
 
-	const { messages } = await import('/data/system-messages.js')
+	const { messages } = await import('./data/system-messages.js')
 	center(messages.headerMessage)
 	print(messages.trespasserMessage)
 	print(messages.hack)
